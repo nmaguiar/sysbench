@@ -749,12 +749,12 @@ void file_report_intermediate(sb_stat_t *stat)
 void file_report_cumulative(sb_stat_t *stat)
 {
   const double seconds = stat->time_interval;
-
+  log_text(LOG_NOTICE, "---\n");
   log_text(LOG_NOTICE, "\n"
            "Throughput:\n"
-           "         read:  IOPS=%4.2f %4.2f MiB/s (%4.2f MB/s)\n"
-           "         write: IOPS=%4.2f %4.2f MiB/s (%4.2f MB/s)\n"
-           "         fsync: IOPS=%4.2f",
+           "         read:\n            IOPS: %4.2f\n            MiB/s: %4.2f\n            MB/s: %4.2f\n"
+           "         write:\n            IOPS: %4.2f\n            MiB/s: %4.2f\n            MB/s: %4.2f\n"
+           "         fsync:\n            IOPS: %4.2f\n",
            stat->reads / seconds,
            stat->bytes_read / mebibyte / seconds,
            stat->bytes_read / megabyte / seconds,

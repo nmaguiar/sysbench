@@ -67,7 +67,7 @@ static void memory_report_cumulative(sb_stat_t *);
 
 static sb_test_t memory_test =
 {
-  .sname = "memory",
+  .sname = "memory", 
   .lname = "Memory functions speed test",
   .ops = {
     .init = memory_init,
@@ -425,14 +425,15 @@ void memory_report_intermediate(sb_stat_t *stat)
 void memory_report_cumulative(sb_stat_t *stat)
 {
   const double megabyte = 1024.0 * 1024.0;
+  log_text(LOG_NOTICE, "---\n");
 
-  log_text(LOG_NOTICE, "Total operations: %" PRIu64 " (%8.2f per second)\n",
+  log_text(LOG_NOTICE, "Total operations: %" PRIu64 "\nTotal operations per second: %8.2f\n",
            stat->events, stat->events / stat->time_interval);
 
   if (memory_oper != SB_MEM_OP_NONE)
   {
     const double mb = stat->events * memory_block_size / megabyte;
-    log_text(LOG_NOTICE, "%4.2f MiB transferred (%4.2f MiB/sec)\n",
+    log_text(LOG_NOTICE, "Transferred MiB: %4.2f\nTransferred MiB per second: %4.2f\n",
              mb, mb / stat->time_interval);
   }
 

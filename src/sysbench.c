@@ -291,7 +291,7 @@ void sb_report_cumulative(sb_stat_t *stat)
   log_text(LOG_NOTICE, "Throughput:");
   log_text(LOG_NOTICE, "    events/s (eps):                      %.4f",
            stat->events / stat->time_interval);
-  log_text(LOG_NOTICE, "    time elapsed:                        %.4fs",
+  log_text(LOG_NOTICE, "    time elapsed (s):                    %.4f",
            stat->time_total);
   log_text(LOG_NOTICE, "    total number of events:              %" PRIu64,
            stat->events);
@@ -341,9 +341,9 @@ void sb_report_cumulative(sb_stat_t *stat)
   time_stddev = sqrt(time_stddev / nthreads);
 
   log_text(LOG_NOTICE, "Threads fairness:");
-  log_text(LOG_NOTICE, "    events (avg/stddev):           %.4f/%3.2f",
+  log_text(LOG_NOTICE, "    events:\n       avg: %.4f\n       stddev: %3.2f",
            events_avg, events_stddev);
-  log_text(LOG_NOTICE, "    execution time (avg/stddev):   %.4f/%3.2f",
+  log_text(LOG_NOTICE, "    execution time:\n       avg: %.4f\n       stddev: %3.2f",
            time_avg, time_stddev);
   log_text(LOG_NOTICE, "");
 

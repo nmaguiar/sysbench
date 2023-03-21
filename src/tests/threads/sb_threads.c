@@ -50,6 +50,7 @@ static void threads_print_mode(void);
 static sb_event_t threads_next_event(int);
 static int threads_execute_event(sb_event_t *, int);
 static int threads_cleanup(void);
+static void threads_report_cumulative(sb_stat_t *);
 
 static sb_test_t threads_test =
 {
@@ -61,7 +62,8 @@ static sb_test_t threads_test =
     .print_mode = threads_print_mode,
     .next_event = threads_next_event,
     .execute_event = threads_execute_event,
-    .cleanup = threads_cleanup
+    .cleanup = threads_cleanup,
+    .report_cumulative = threads_report_cumulative
   },
   .args = threads_args
 };
@@ -160,3 +162,9 @@ void threads_print_mode(void)
          thread_yields, thread_locks);
 }
 
+void threads_report_cumulative(sb_stat_t *stat)
+{
+  log_text(LOG_NOTICE, "---\n");
+
+  sb_report_cumulative(stat);
+}

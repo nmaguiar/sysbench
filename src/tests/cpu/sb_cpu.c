@@ -129,6 +129,7 @@ void cpu_print_mode(void)
 
 void cpu_report_cumulative(sb_stat_t *stat)
 {
+  log_text(LOG_NOTICE, "---\n");
   log_text(LOG_NOTICE, "CPU speed:");
   log_text(LOG_NOTICE, "    events per second: %8.2f",
            stat->events / stat->time_interval);

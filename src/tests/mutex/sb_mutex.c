@@ -52,6 +52,7 @@ static void mutex_print_mode(void);
 static sb_event_t mutex_next_event(int);
 static int mutex_execute_event(sb_event_t *, int);
 static int mutex_done(void);
+static void mutex_report_cumulative(sb_stat_t *);
 
 static sb_test_t mutex_test =
 {
@@ -62,7 +63,8 @@ static sb_test_t mutex_test =
      .print_mode = mutex_print_mode,
      .next_event = mutex_next_event,
      .execute_event = mutex_execute_event,
-     .done = mutex_done
+     .done = mutex_done,
+     .report_cumulative = mutex_report_cumulative
   },
   .args = mutex_args
 };
@@ -170,3 +172,9 @@ void mutex_print_mode(void)
   log_text(LOG_INFO, "Doing mutex performance test");
 }
 
+void mutex_report_cumulative(sb_stat_t *stat)
+{
+  log_text(LOG_NOTICE, "---\n");
+
+  sb_report_cumulative(stat);
+}
