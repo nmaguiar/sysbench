@@ -1,1 +1,32 @@
+name: Build
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '30 0 * * 6'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Exec build
+      run : |
+        ./autogen.sh
+        ./configure --without-mysql
+        make -j
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: |
+          src/sysbench
