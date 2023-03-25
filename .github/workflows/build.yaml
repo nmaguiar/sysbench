@@ -15,16 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Exec build
-        run : |
-          ./autogen.sh
-          ./configure --without-mysql
-          make -j
-          
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: sysbench
-          path: src/sysbench
+      - name: run travis
+        uses: ktomk/run-travis-yml@v1.8.1
+        
