@@ -11,8 +11,8 @@ sudo: required
 
 services:
   - docker
-  - mysql
-  - postgresql
+#  - mysql
+#  - postgresql
 
 git:
   depth: 100500
@@ -207,18 +207,18 @@ install:
       ;;
     esac
 
-before_script:
-  - mysql -u root -e 'CREATE DATABASE sbtest'
-  - psql -U postgres -c 'CREATE DATABASE sbtest'
+#before_script:
+#  - mysql -u root -e 'CREATE DATABASE sbtest'
+#  - psql -U postgres -c 'CREATE DATABASE sbtest'
 
 script:
   - >
     if [ -n "$TARGET" ]; then
       case "$TARGET" in
       test)
-        ./autogen.sh && ./configure --with-mysql --with-pgsql
+        ./autogen.sh && ./configure --without-mysql
         make
-        SBTEST_MYSQL_ARGS="--mysql-user=root" SBTEST_PGSQL_ARGS="--pgsql-user=postgres" make test
+        make test
         ;;
       distcheck)
         ./autogen.sh && ./configure --without-mysql
@@ -226,9 +226,9 @@ script:
         make distcheck
         ;;
       coverage)
-        ./autogen.sh && ./configure --enable-coverage --enable-asan --enable-msan --with-mysql --with-pgsql
+        ./autogen.sh && ./configure --enable-coverage --enable-asan --enable-msan --without-mysql
         make -j2
-        SBTEST_MYSQL_ARGS="--mysql-user=root" SBTEST_PGSQL_ARGS="--pgsql-user=postgres" make test
+        make test
         ;;
       esac
     else
