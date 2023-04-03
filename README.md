@@ -1,3 +1,7 @@
+Changes retrieve the output as YAML
+
+---
+
 [![Latest Release][release-badge]][release-url]
 [![Build Status][travis-badge]][travis-url]
 [![Debian Packages][deb-badge]][deb-url]
