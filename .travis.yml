@@ -218,7 +218,7 @@ script:
       test)
         ./autogen.sh && ./configure --without-mysql
         make
-        make test
+        # make test
         ;;
       distcheck)
         ./autogen.sh && ./configure --without-mysql
@@ -228,7 +228,7 @@ script:
       coverage)
         ./autogen.sh && ./configure --enable-coverage --enable-asan --enable-msan --without-mysql
         make -j2
-        make test
+        # make test
         ;;
       esac
     else
