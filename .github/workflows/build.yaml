@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@2.7.0
+        
       - name: run travis
         uses: ktomk/run-travis-yml@v1.8.1
         
